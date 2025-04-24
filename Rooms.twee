@@ -1,0 +1,600 @@
+:: StoryTitle
+Rooms
+
+
+:: StoryData
+{
+  "ifid": "BCEE480E-E0F8-467F-86FC-D9DCB41AC1B8",
+  "format": "SugarCube",
+  "format-version": "2.37.3",
+  "start": "Inicio",
+  "zoom": 0.6
+}
+
+
+:: Corredor Principal {"position":"1000,100","size":"100,100"}
+Vida: $vida  |  Kits médicos: $kits  |  Facas: $facas  |  Lanterna: $lanterna | Chaves:<<print $chaves.length>> de 3
+
+Corredor Principal
+
+<<if $kits > 0>>
+Você pode usar Kit médico para se curar.
+[[Usar kit médico->Usar Kit]]
+<</if>>
+<img src="https://i.imgur.com/hZ402wN.jpeg" alt="Corredor" 	class="responsive-image" />
+
+[[Subcorredor Norte]]
+[[Subcorredor Leste]]
+[[Subcorredor Oeste]]
+[[Porta Selada]]
+
+
+:: Fim {"position":"0,0","size":"100,100"}
+Suas forças se esgotaram. A escuridão te consome enquanto o monstro se aproxima lentamente...
+
+           <div style="text-align: center;">
+  				<img src="https://i.imgur.com/4sNrh3e.png" alt="Monstro ataca" 						class = "responsive-image" />
+		</div>
+
+<h3>**Final Ruim: Sem Forças</h3>
+
+[[Recomeçar->Inicio]]
+
+
+:: Fim Escuro {"position":"200,0","size":"100,100"}
+A lanterna pisca e apaga. Tudo está escuro. Você ouve uma respiração pesada... algo se aproxima, uma porta se abre lentamente, sentido somente um grande calafrio.
+
+ <div style="text-align: center;">
+  	<img src="https://i.imgur.com/7d1Q7To.jpeg" alt="Monstro se aproxima" 	class = "responsive-image" />
+</div>
+
+<h3>**Final Ruim: Sozinho no escuro</h3>
+
+[[Recomeçar->Inicio]]
+
+
+:: Final Bom {"position":"400,0","size":"100,100"}
+<<if $armaCompleta>>
+Você encara o monstro tremulo, mas com sua arma carregada. 
+Ele ruge, mas dessa vez, você não foge.
+
+    	<div style="text-align: center;">
+  				<img src="https://i.imgur.com/TobqVSw.jpeg" alt="Arma apontada para o 				monstro" 	class = "responsive-image" />
+		</div>
+
+**BANG!**
+
+O monstro cai. Morrendo lentamente se arrastando até próximo a porta selada.
+
+Aos poucos o mostro perde os sinais de vida e a porta se abre lentamente, revelando uma fresta de brilho atráves da porta.
+
+<div style="text-align: center;">
+  <img src="https://i.imgur.com/6VlVTzS.jpeg" alt="Monstro está morto e porta se abre" class = "responsive-image" />
+</div>
+
+<h3>**Final Bom : Caça e Caçador</h3>
+
+[[Recomeçar->Inicio]]
+<</if>>
+
+
+:: Final Saida {"position":"600,0","size":"100,100"}
+Você sai da velha casa com o sol nascendo.
+Avançando você olha para tras uma ultima vez.
+Para sua surpresa, a casa estava desaparecendo.
+
+<div style="text-align: center;">
+  <img src="https://i.imgur.com/AEyhLG7.jpeg" alt="Imagem a luz do Sol" class = "responsive-image" />
+</div>
+
+<h3>**Final Bom: Saida do inferno</h3>
+
+[[Recomeçar->Inicio]]
+
+
+:: Inicio {"position":"200,200","size":"100,100"}
+Você acorda sozinho, em meio ao cheiro de mofo e poeira antiga. A luz fraca da lua atravessa os buracos de uma janela quebrada, revelando paredes descascadas e marcas que parecem… arranhões?
+
+Sua cabeça lateja. Você não lembra como chegou aqui. Só sabe que precisa sair.
+Atras de você, você vê uma porta selada por 3 cadeados, sem possibilidade de quebra-los.
+
+Você vê uma lanterna na sua frente , será util para explorar, mas tome cuidado, ela ao acabar , estará a mercê do que habita por aqui.
+
+Não será fácil. Esta casa tem fome de histórias. E a sua ainda não terminou.
+
+Explore os corredores escuros. Sobreviva ao que se esconde nas sombras. Encontre itens. Evite a morte.
+
+<ul>
+	<li>Utilize Facas para tentar se defender</li>
+	<li>Utilize Kit Médicos para se curar, caso seja pego 3 vezes, será o seu fim</li>
+	<li>Procure um meio melhor de se defender, em que sabe há uma chance.</li>
+    <li>Lembre sua lanterna é limitada , caso suas carga acabe será o seu fim </li>
+</ul>
+
+E, acima de tudo…
+Não abra a porta errada.
+
+[[Seguir pelo corredor principal->Corredor Principal]]
+
+<<set $vida = 3>>
+<<set $kits = 0>>
+<<set $facas = 0>>
+<<set $chaves = []>>
+<<set $lanterna = 52>>
+<<set $arma = false>>
+<<set $municao = false>>
+<<set $armaCompleta = false>>
+<<set $itensEncontrados = []>>
+
+
+:: Porta Selada {"position":"625,400","size":"100,100"}
+<<if $chaves.length == 3>>
+Você usa as três chaves... a porta range e se abre.
+[[Entrar na sala selada->Final Saida]]
+<<else>>
+A porta está trancada com três fechaduras. Você precisa de 3 chaves.
+
+<img src="https://i.imgur.com/mt7GN0g.png" alt="Porta com cadeado" class = "responsive-image" />
+
+[[Voltar->Corredor Principal]]
+<</if>>
+
+
+:: Quarto 03 {"position":"300,600","size":"100,100"}
+<<set _quarto = "O3">>
+Você entra no quarto O3. Pegadas sujas cruzam o chão.
+
+<<ItemAleatorio>>
+<<Monstro>>
+
+[[Voltar ao subcorredor->Subcorredor Oeste]]
+
+
+:: Quarto L1 {"position":"1300,600","size":"100,100"}
+<<set _quarto = "L1">>
+Você entra no quarto L1. Um forte cheiro de ferrugem invade suas narinas.
+
+<<ItemAleatorio>>
+<<Monstro>>
+
+[[Voltar ao subcorredor->Subcorredor Leste]]
+
+
+:: Quarto L2 {"position":"1400,600","size":"100,100"}
+<<set _quarto = "L2">>
+Você entra no quarto L2. Um quadro está torto, revelando algo atrás.
+
+<<ItemAleatorio>>
+<<Monstro>>
+
+[[Voltar ao subcorredor->Subcorredor Leste]]
+
+
+:: Quarto L3 {"position":"1500,600","size":"100,100"}
+<<set _quarto = "L3">>
+Você entra no quarto L3. Um relógio parado marca 3:33.
+
+<<ItemAleatorio>>
+<<Monstro>>
+
+[[Voltar ao subcorredor->Subcorredor Leste]]
+
+
+:: Quarto L4 {"position":"1600,600","size":"100,100"}
+<<set _quarto = "L4">>
+Você entra no quarto L4. Um rangido se ouve vindo do teto.
+
+<<ItemAleatorio>>
+<<Monstro>>
+
+[[Voltar ao subcorredor->Subcorredor Leste]]
+
+
+:: Quarto L5 {"position":"1700,600","size":"100,100"}
+<<set _quarto = "L5">>
+Você entra no quarto L5. A janela está coberta de pregos.
+
+<<ItemAleatorio>>
+<<Monstro>>
+
+[[Voltar ao subcorredor->Subcorredor Leste]]
+
+
+:: Quarto N1 {"position":"700,600","size":"100,100"}
+<<set _quarto = "N1">>
+Você entra no quarto N1. Há cheiro de mofo e poeira no ar.
+
+<<ItemAleatorio>>
+<<Monstro>>
+
+[[Voltar ao subcorredor->Subcorredor Norte]]
+
+
+:: Quarto N2 {"position":"800,600","size":"100,100"}
+<<set _quarto = "N2">>
+Você entra no quarto N2. As paredes estão descascadas e você ouve pingos de água.
+
+<<ItemAleatorio>>
+<<Monstro>>
+
+[[Voltar ao subcorredor->Subcorredor Norte]]
+
+
+:: Quarto N3 {"position":"900,600","size":"100,100"}
+<<set _quarto = "N3">>
+Você entra no quarto N3. Um espelho rachado reflete sua figura.
+
+<<ItemAleatorio>>
+<<Monstro>>
+
+[[Voltar ao subcorredor->Subcorredor Norte]]
+
+
+:: Quarto N4 {"position":"1000,600","size":"100,100"}
+<<set _quarto = "N4">>
+Você entra no quarto N4. O chão range a cada passo.
+
+<<ItemAleatorio>>
+<<Monstro>>
+
+[[Voltar ao subcorredor->Subcorredor Norte]]
+
+
+:: Quarto N5 {"position":"1100,600","size":"100,100"}
+<<set _quarto = "N5">>
+Você entra no quarto N5. Há marcas de garras na parede.
+
+<<ItemAleatorio>>
+<<Monstro>>
+
+[[Voltar ao subcorredor->Subcorredor Norte]]
+
+
+:: Quarto O1 {"position":"100,600","size":"100,100"}
+<<set _quarto = "O1">>
+Você entra no quarto O1. Um brinquedo antigo está jogado no canto.
+
+<<ItemAleatorio>>
+<<Monstro>>
+
+[[Voltar ao subcorredor->Subcorredor Oeste]]
+
+
+:: Quarto O2 {"position":"200,600","size":"100,100"}
+<<set _quarto = "O2">>
+Você entra no quarto O2. Pegadas sujas cruzam o chão.
+
+<<ItemAleatorio>>
+<<Monstro>>
+
+[[Voltar ao subcorredor->Subcorredor Oeste]]
+
+
+:: Quarto O3 {"position":"400,600","size":"100,100"}
+<<set _quarto = "O3">>
+Você entra no quarto O3. Há uma poltrona virada para a parede.
+
+<<ItemAleatorio>>
+<<Monstro>>
+
+[[Voltar ao subcorredor->Subcorredor Oeste]]
+
+
+:: Quarto O4 {"position":"400,600","size":"100,100"}
+<<set _quarto = "O4">>
+Você entra no quarto O4. Um vento frio passa mesmo com as janelas fechadas.
+
+<<ItemAleatorio>>
+<<Monstro>>
+
+[[Voltar ao subcorredor->Subcorredor Oeste]]
+
+
+:: Quarto O5 {"position":"500,600","size":"100,100"}
+<<set _quarto = "O5">>
+Você entra no quarto O5. As luzes piscam por um instante.
+
+<<ItemAleatorio>>
+<<Monstro>>
+
+[[Voltar ao subcorredor->Subcorredor Oeste]]
+
+
+:: StoryInit {"position":"0,200","size":"100,100"}
+\:: StoryInit
+<<set $vida = 3>>
+<<set $kits = 0>>
+<<set $facas = 0>> 
+<<set $chaves = []>>
+<<set $lanterna = 100>>
+<<set $arma = false>>
+<<set $municao = false>>
+<<set $armaCompleta = false>>
+<<set $itensEncontrados = []>>
+<<set $mensagemArma = false>>
+
+<<set _chavesDistribuidas = false>>
+<<set _itensNoQuarto = 0>>
+
+<<widget "DistribuirChaves">>
+	<<if !_chavesDistribuidas>>
+		<<set _quartosComChaves = random(1, 15)>>
+		<<set $chaves = []>>
+		<<set _chave1 = random(1, 15)>>
+		<<set _chave2 = random(1, 15)>>
+		<<set _chave3 = random(1, 15)>>
+		<<if _chave1 != _chave2 and _chave1 != _chave3 and _chave2 != _chave3>>
+			<<set $chaves.push(_chave1)>>
+			<<set $chaves.push(_chave2)>>
+			<<set $chaves.push(_chave3)>>
+		<<else>>
+			<<set _chavesDistribuidas = false>>
+		<</if>>
+		<<set _chavesDistribuidas = true>>
+	<</if>>
+<</widget>>
+
+<<widget "Monstro">>
+	<<set _monstro = random(1, 4)>>
+	<<set $lanterna -= 4>>
+	<<if $lanterna <= 0>>
+		<<goto "Fim Escuro">>
+	<</if>>
+	<<if _monstro == 1 || _monstro == 2>>
+		<p><strong>Um monstro salta das sombras!</strong></p>
+        <img src="https://i.imgur.com/mu2InQ9.jpeg" alt="Monstro Aparece" class ="responsive-image" />
+		<<if $armaCompleta>>
+			<p>Você embosca o monstro com sua arma carregada.</p>
+			<<set $vida = 3>>
+			<<goto "Final Bom">>
+		<<else>>
+			<<if $facas > 0>>
+				<p>Você usa uma faca para se defender!</p>
+				<<set $facas -= 1>>
+				<<set _danoMonstro = random(1, 6)>>
+				<<if _danoMonstro >= 4>>
+<img src="https://i.imgur.com/4sNrh3e.png" alt="Monstro critou"class="responsive-image" />
+                    Não foi o suficiente....
+					<<set $vida -= 1>>
+					<p>O monstro te feriu! Vida restante: $vida</p>
+				<<else>>
+					<p>Você conseguiu se defender bem com a faca.</p>
+<img src="https://i.imgur.com/xlgUHbV.png" alt="Você se defende com a faca" class = "responsive-image" />
+				<</if>>
+			<<else>>
+				<<set _dado = random(1, 20)>>
+				<p>Você tenta escapar... <strong>Você rolou: <<print _dado>></strong></p>
+				<<if _dado >= 12>>
+					<p>Você escapou por pouco!</p>
+ <img src="https://i.imgur.com/RAPSB70.png" alt="Esquivou do monstro" class="responsive-image" />
+				<<else>>
+					<<set $vida -= 1>>
+<img src="https://i.imgur.com/4sNrh3e.png" alt="Monstro deu dano" class ="responsive-image" />
+					<p>Você foi ferido! Vida restante: $vida</p>
+					<<if $vida <= 0>>
+						<<goto "Fim">>
+					<</if>>
+				<</if>>
+			<</if>>
+		<</if>>
+	<<else>>
+		<p>Está vazio, mas você sente tensão no ar...</p>
+	<</if>>
+<</widget>>
+
+<<widget "ItemAleatorio">>
+	<<if $itensEncontrados.indexOf(_quarto) === -1>>
+		<<set $itensEncontrados.push(_quarto)>>
+		<<set _itensNoQuarto = random(1, 2)>> 
+		<<set _sorte = random(1, 6)>>
+		<<if $chaves.length < 3 and _sorte == 1 and !($chaves.indexOf(_quarto) > -1)>>
+			<p><strong>Você encontrou uma chave!</strong></p>
+  						<img src="https://i.imgur.com/hIUFSxn.png" alt="Chave" 						class = "responsive-image" />
+			<<set $chaves.push(_quarto)>>
+		<<elseif $kits < 3 and _sorte == 2>>
+			<p><strong>Você encontrou um kit médico!</strong></p>
+  <img src="https://i.imgur.com/5lT8hNU.png" alt="Kit Médico" class = "responsive-image" />
+			<<set $kits += 1>>
+		<<elseif $facas < 1 and _sorte == 3>>
+			<p><strong>Você encontrou uma faca!</strong></p>
+ <img src="https://i.imgur.com/uEPyDeS.png" alt="Faca" class = "responsive-image" />
+			<<set $facas += 1>>
+		<<elseif not $arma and _sorte == 4 and random(1, 20) <= 12>>
+			<p><strong>Você encontrou uma arma sem munição.</strong></p>
+<img src="https://i.imgur.com/5AF9Sjl.png" alt="Arma" class = "responsive-image" />
+			<<set $arma = true>>
+		<<elseif not $municao and _sorte == 5 and random(1, 20) <= 12>> <!-- 
+			<p><strong>Você encontrou munição!</strong></p>
+<img src="https://i.imgur.com/aYBydj5.png" alt="Munição" class = "responsive-image" />
+			<<set $municao = true>>
+		<</if>>
+		<<if _itensNoQuarto == 2>> <!-- Se o quarto tiver 2 itens, sorteia outro item -->
+			<<set _sorte = random(1, 6)>>
+			<<if $chaves.length < 3 and _sorte == 1 and !($chaves.indexOf(_quarto) > -1)>>
+				<p><strong>Você encontrou mais uma chave!</strong></p>
+<img src="https://i.imgur.com/hIUFSxn.png" alt="Chave" class = "responsive-image" />
+				<<set $chaves.push(_quarto)>>
+			<<elseif $kits < 3 and _sorte == 2>>
+				<p><strong>Você encontrou kit médico!</strong></p>
+<img src="https://i.imgur.com/5lT8hNU.png" alt="Kit Médico" class = "responsive-image" />
+				<<set $kits += 1>>
+			<<elseif $facas < 1 and _sorte == 3>>
+				<p><strong>Você encontrou faca!</strong></p>
+<img src="https://i.imgur.com/uEPyDeS.png" alt="Faca" class = "responsive-image" />
+				<<set $facas += 1>>
+			<<elseif not $arma and _sorte == 4 and random(1, 20) <= 12>> <!-- 
+				<p><strong>Você encontrou uma arma quebrada.</strong></p>
+<img src="https://i.imgur.com/5AF9Sjl.png" alt="Arma" class = "responsive-image" />
+				<<set $arma = true>>
+			<<elseif not $municao and _sorte == 5 and random(1, 20) <= 12>> <!-- 
+				<p><strong>Você encontrou munição!</strong></p>
+<img src="https://i.imgur.com/aYBydj5.png" alt="Munição" class = "responsive-image" />
+				<<set $municao = true>>
+			<</if>>
+		<</if>>
+		<<if $arma and $municao>>
+			<<set $armaCompleta = true>>
+            <<if $mensagemArma == false>>
+				<p><strong>Você agora tem uma arma completa!</strong></p>
+            	<<set $mensagemArma =true>>
+             <</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+
+:: Subcorredor Leste {"position":"1500,400","size":"100,100"}
+Vida: $vida  |  Kits médicos: $kits  |  Facas: $facas  |  Lanterna: $lanterna | Chaves:<<print $chaves.length>> de 3
+
+O subcorredor Leste está úmido e há sons distantes ecoando pelas paredes. 
+
+<<if $kits > 0>>
+Você pode usar Kit médico para se curar.
+[[Usar kit médico->Usar Kit]]
+<</if>>
+
+  				<img src="https://i.imgur.com/FZKqPus.png" alt="Imagem corredor" 						class = "responsive-image" />
+        
+- [[Quarto L1]]
+- [[Quarto L2]]
+- [[Quarto L3]]
+- [[Quarto L4]]
+- [[Quarto L5]]
+- [[Voltar ao corredor principal->Corredor Principal]]
+
+
+:: Subcorredor Norte {"position":"900,400","size":"100,100"}
+Vida: $vida  |  Kits médicos: $kits  |  Facas: $facas  |  Lanterna: $lanterna | Chaves:<<print $chaves.length>> de 3
+
+O subcorredor Norte é frio e cheira a mofo. As paredes estão cobertas de marcas estranhas.
+
+<<if $kits > 0>>
+Você pode usar Kit médico para se curar.
+[[Usar kit médico->Usar Kit]]
+<</if>>
+<img src="https://i.imgur.com/FZKqPus.png" alt="Imagem corredor" class ="responsive-image" />
+
+- [[Quarto N1]]
+- [[Quarto N2]]
+- [[Quarto N3]]
+- [[Quarto N4]]
+- [[Quarto N5]]
+- [[Voltar ao corredor principal->Corredor Principal]]
+
+
+:: Subcorredor Oeste {"position":"300,400","size":"100,100"}
+Vida: $vida  |  Kits médicos: $kits  |  Facas: $facas  |  Lanterna: $lanterna | Chaves:<<print $chaves.length>> de 3
+
+O subcorredor Oeste tem um cheiro forte de ferrugem. O ar está pesado e o silêncio é opressor.
+
+<<if $kits > 0>>
+Você pode usar Kit médico para se curar.
+[[Usar kit médico->Usar Kit]]
+<</if>>
+
+  				<img src="https://i.imgur.com/FZKqPus.png" alt="Imagem corredor" 						class = "responsive-image" />
+
+- [[Quarto O1]]
+- [[Quarto O2]]
+- [[Quarto O3]]
+- [[Quarto O4]]
+- [[Quarto O5]]
+- [[Voltar ao corredor principal->Corredor Principal]]
+
+
+:: Usar Kit {"position":"1200,400","size":"100,100"}
+Você usa um kit médico e sente suas forças retornando.
+
+<<set $vida += 1>>
+<<set $kits -= 1>>
+
+[[Voltar->Corredor Principal]]
+
+
+:: StoryStylesheet [stylesheet]
+.responsive-image {
+    max-width: 100%;
+    height: auto;
+}
+/* ============================= */
+/*     STORY STYLESHEET         */
+/* ============================= */
+
+/* Fundo geral com textura sutil e cor escura */
+body {
+  background-color: #111;
+  background-size: cover;
+  color: #eee;
+  font-family: 'Crimson Text', serif;
+  line-height: 1.6;
+}
+
+/* Títulos com efeito de sangue pingando */
+h1, h2, h3 {
+  font-family: 'Nosifer', cursive;
+  color: #e22;
+  text-shadow: 0 0 8px rgba(255,0,0,0.7);
+  position: relative;
+}
+h1::after, h2::after, h3::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -4px;
+  height: 4px;
+  background: linear-gradient(to right, transparent, #e22 50%, transparent);
+  animation: drip 1.5s ease-in-out infinite;
+}
+@keyframes drip {
+  0%, 60% { transform: translateY(0) scaleX(0.8); opacity: 0; }
+  70% { opacity: 1; }
+  100% { transform: translateY(8px) scaleX(1); opacity: 0; }
+}
+
+/* Links estilo antigo de máquina de escrever vermelha */
+a, a:visited {
+  color: #f44;
+  text-decoration: none;
+  font-family: 'Special Elite', cursive;
+}
+a:hover {
+  text-shadow: 0 0 5px #f44;
+}
+
+/* Caixa de HUD com bordas de correntes */
+.hud {
+  background: rgba(0,0,0,0.8);
+  border: 2px solid #600;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-family: 'Special Elite', cursive;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.7),
+              0 0 15px rgba(255,0,0,0.3);
+}
+/* Estilo de parágrafo enfatizado */
+em, strong {
+  color: #f66;
+  text-shadow: 0 0 4px rgba(255,0,0,0.6);
+}
+
+/* Caixas de imagem com moldura gótica */
+img {
+  border: 4px solid #300;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.9);
+  max-width: 100%;
+  display: block;
+  margin: 12px auto;
+}
+
+/* Caixa de escolhas com hover tenso */
+.tw-link {
+  background: rgba(100,0,0,0.2);
+  border: 1px solid #600;
+  padding: 6px 8px;
+  border-radius: 3px;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.tw-link:hover {
+  background: rgba(200,0,0,0.4);
+  box-shadow: 0 0 8px rgba(255,0,0,0.7);
+}
